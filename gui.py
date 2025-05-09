@@ -59,7 +59,8 @@ class HSKMenu(tk.Toplevel):
         self.center_frame = tk.Frame(self.btn_frame)
         self.center_frame.pack(anchor='center')
 
-        for lvl in range(1,5):
+        #anonymous function to create buttons
+        for lvl in range(1,5):                                                          
             if self.mode == 'wordlists':
                 tk.Button(self.center_frame, text=f'HSK {lvl}',font='Sans',
                     command=lambda l = lvl: self.wordlists_window(l)).pack(side='left', padx=5)
@@ -154,7 +155,10 @@ class HSKMenu(tk.Toplevel):
                 widget.destroy()
 
         def start_quiz() -> None:
-            # contains the quiz interface, entry, submit, start, and reset buttons
+            # contains the quiz interface, entry, submit, start, and reset buttons, handles a value error 
+            error_label = tk.Label(scrollable_frame, text='',font=('Sans',18),fg='red')
+            error_label.grid(row=3,column=0,columnspan=3,pady=5)
+
             try:
                 count = int(question_count.get())
                 if count > len(hsk_data['simplified']):
@@ -203,9 +207,9 @@ class HSKMenu(tk.Toplevel):
                     reset_button.grid()
                     
                 tk.Button(scrollable_frame, text='Submit', font=('Sans', 24), command=check_answers).grid(row=count + 1, column=0, padx=5, pady=5)
-    
+
             except ValueError:
-                print(ValueError)
+                error_label.config(text='Enter a number greater than 0')
             
         def reset_quiz() -> None:
             # resets the quiz
@@ -215,5 +219,3 @@ class HSKMenu(tk.Toplevel):
             tk.Button(scrollable_frame, text='Start Quiz', font=('Sans',12), command=start_quiz).grid(row=2,column=2,padx=5)
 
         tk.Button(scrollable_frame, text='Start Quiz', font=('Sans',12), command=start_quiz).grid(row=2,column=2,padx=5)
-        
-        
