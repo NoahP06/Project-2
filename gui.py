@@ -146,7 +146,7 @@ class HSKMenu(tk.Toplevel):
         tk.Entry(scrollable_frame, textvariable=question_count, font=('Sans', 18), width=12).grid(row=2, column=1,padx=5,pady=5)
 
         reset_button = None
-        
+        #
         
         
         def clear_window() -> None:
