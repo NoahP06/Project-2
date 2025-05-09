@@ -18,7 +18,7 @@ def get_hsk_data(level: int) -> dict:
             'definition': [i[4] for i in words]
         }
     except FileNotFoundError:
-        print('File not found')
+        raise FileNotFoundError
 
 def create_quiz(data: dict, count: int) -> list:
     return random.sample(range(len(data['simplified'])),count)
